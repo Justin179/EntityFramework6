@@ -14,7 +14,8 @@ namespace ConsoleApp1
             using (var db = new ContosoUniversityEntities())
             {
 
-                //db.Database.Log = (sql) => { Console.WriteLine(sql); };
+                // 印出sql指令
+                db.Database.Log = (sql) => { Console.WriteLine(sql); };
 
                 //GetCourse_Git(db);
                 //GetDepartment(db);
@@ -22,7 +23,33 @@ namespace ConsoleApp1
                 //UpdateCourse(db);
                 //DeleteCourse(db);
 
-               //Console.ReadLine(); // 有這一行，console才不會馬上就被關掉
+
+                var one = db.Course.Find(6);
+                //// 改狀態
+                //db.Entry(one).State = System.Data.Entity.EntityState.Modified;
+                //// 依狀態，所以執行update sql
+                //db.SaveChanges();
+
+                //var c = new Course() { CourseID = 7 };
+                //// 改狀態
+                //db.Entry(c).State = System.Data.Entity.EntityState.Deleted;
+                //db.Course.Remove(c);
+                //// 依狀態，所以執行delete sql
+                //db.SaveChanges();
+
+                // 這邊是看狀態的變化
+                Console.WriteLine(db.Entry(one).State);
+                one.MyCredits += 1;
+                Console.WriteLine(db.Entry(one).State);
+
+                ////db.Entry(one).State = System.Data.Entity.EntityState.Deleted;
+                //db.SaveChanges();
+
+                //Console.WriteLine(db.Entry(one).State);
+
+
+
+                Console.ReadLine(); // 有這一行，console才不會馬上就被關掉
             }
         }
 
@@ -47,9 +74,12 @@ namespace ConsoleApp1
         {
             var c = new Course()
             {
-                Title = "Entity Framework 6",
-                MyCredits = 100
-            };
+                Title = "Entity Framework 6.1",
+                MyCredits = 100,
+                CreatedOn = DateTime.Now,
+                UpdatedOn = DateTime.Now
+
+        };
             c.Department = db.Department.Find(2);
 
             db.Course.Add(c);
