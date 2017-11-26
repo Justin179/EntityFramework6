@@ -38,15 +38,21 @@ namespace ConsoleApp1
                 //db.SaveChanges();
 
                 // 這邊是看狀態的變化
-                Console.WriteLine(db.Entry(one).State);
-                one.MyCredits += 1;
-                Console.WriteLine(db.Entry(one).State);
+                //Console.WriteLine(db.Entry(one).State);
+                //one.MyCredits += 1;
+                //Console.WriteLine(db.Entry(one).State);
 
                 ////db.Entry(one).State = System.Data.Entity.EntityState.Deleted;
                 //db.SaveChanges();
 
                 //Console.WriteLine(db.Entry(one).State);
 
+                var data = db.GetCourse("%Git%");
+
+                foreach (var item in data)
+                {
+                    Console.WriteLine(item.Title);
+                }
 
 
                 Console.ReadLine(); // 有這一行，console才不會馬上就被關掉
