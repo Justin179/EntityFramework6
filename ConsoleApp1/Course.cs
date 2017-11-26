@@ -23,8 +23,8 @@ namespace ConsoleApp1
     
         public int CourseID { get; set; }
         public string Title { get; set; }
-        public int Credits { get; set; }
         public int DepartmentID { get; set; }
+        public int MyCredits { get; set; }
     
         public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
